@@ -9,7 +9,7 @@ const jwtPrivateKey = process.env.JWT_PRIVATE_KEY;
 /** JWT 생성 */
 const generateToken = (user) => {
   return jwt.sign({
-    id: user.id,
+    email: user.email,
     name: user.name
   }, jwtPrivateKey, {
     expiresIn: '30m'
@@ -18,10 +18,10 @@ const generateToken = (user) => {
 
 /** 회원 가입 */
 const registerMember = (req, res) => {
-  const { id, password, name } = req.body;
+  const { email, password, name } = req.body;
 
-  const insertQuery = 'insert into member (id, password, name) values (?, ?, ?)';
-  const values = [id, password, name];
+  const insertQuery = 'insert into member (email, password, name) values (?, ?, ?)';
+  const values = [email, password, name];
 
   db.query(insertQuery, values, (err, results) => {
     if (err) {
@@ -43,10 +43,10 @@ const registerMember = (req, res) => {
 
 /** 로그인 */
 const loginMember = (req, res) => {
-  const { id, password } = req.body;
+  const { email, password } = req.body;
 
-  const query = 'select * from member where id = ?';
-  const values = [id];
+  const query = 'select * from member where email = ?';
+  const values = [email];
 
   db.query(query, values, (err, results) => {
     if (err) {

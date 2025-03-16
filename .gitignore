@@ -15,3 +15,5 @@ mariadb.js
 
 #sql
 *.sql
+
+*.txt

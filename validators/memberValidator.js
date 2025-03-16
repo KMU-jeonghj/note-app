@@ -1,15 +1,16 @@
 const { body } = require('express-validator');
 
 const registerValidator = [
-  body('id')
+  body('email')
     .isString().withMessage('문자열이 아닙니다.')
-    .isLength({ min: 3, max: 20}).withMessage('아이디는 3~20자 사이여야 합니다.')
-    .matches(/^[a-zA-Z][a-zA-Z0-9_.]*$/).withMessage('아이디는 영문자로 시작하고, 영문, 숫자, 밑줄(_), 점(.)만 사용할 수 있습니다.'),
+    // .isLength({ min: 3, max: 20}).withMessage('아이디는 3~20자 사이여야 합니다.')
+    // .matches(/^[a-zA-Z][a-zA-Z0-9_.]*$/).withMessage('아이디는 영문자로 시작하고, 영문, 숫자, 밑줄(_), 점(.)만 사용할 수 있습니다.')
+    ,
   
   body('password')
     .isString().withMessage('문자열이 아닙니다.')
-    .isLength({ min: 8, max: 30}).withMessage('비밀번호는 8~30자 사이여야 합니다.')
-    .matches(/^(?=.*[A-Za-z])(?=.*\d|.*[^A-Za-z0-9]).{8,}$/).withMessage('비밀번호는 영문 + 숫자 또는 특수문자의 조합이어야 합니다.')
+    // .isLength({ min: 8, max: 30}).withMessage('비밀번호는 8~30자 사이여야 합니다.')
+    // .matches(/^(?=.*[A-Za-z])(?=.*\d|.*[^A-Za-z0-9]).{8,}$/).withMessage('비밀번호는 영문 + 숫자 또는 특수문자의 조합이어야 합니다.')
     .not().matches(/\s/).withMessage('비밀번호에 공백을 포함할 수 없습니다.'),
 
   body('name')
@@ -19,11 +20,11 @@ const registerValidator = [
 ];
 
 const loginValidator = [
-  body('id')
+  body('email')
     .isString().withMessage('문자열이 아닙니다.')
     .notEmpty().withMessage('아이디를 입력하세요.'),
   
-  body('id')
+  body('password')
     .isString().withMessage('문자열이 아닙니다.')
     .notEmpty().withMessage('비밀번호를 입력하세요.')
 ];
